@@ -25,7 +25,7 @@ jobs:
         run: npm install
 
       - name: Run Linting (ESLint)
-        run: npm run lint  # 🔥 Ensures code follows best practices
+        run: cd client && npm run lint  # 🔥 Ensures code follows best practices
 
       - name: Check Formatting (Prettier)
         run: npm run format  # 🔥 Ensures files are properly formatted
