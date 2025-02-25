@@ -27,6 +27,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Verify Cypress Installation
+        run: npx cypress verify
+
+
       - name: Build the Application
         run: npm run build
 
