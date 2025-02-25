@@ -43,4 +43,4 @@ jobs:
           browser: chrome
           spec: "cypress/component-tests/**/*.cy.{js,jsx,ts,tsx}"
           project: "cypress"
-          command: "run --component"
+          command: "cypress run --component"
