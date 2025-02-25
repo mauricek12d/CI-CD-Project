@@ -42,3 +42,14 @@ git add .
 git commit -m "feat: Add a new feature"
 Push to GitHub & create a PR.
 ```
+
+Screenshots 
+
+### ✅ Cypress Tests Workflow (`test.yml`)
+![Cypress Test Workflow](https://github.com/mauricek12d/CI-CD-Project/blob/main/test.yml.png?raw=true)
+
+### ✅ Code Contribution Workflow (`contribute.yml`)
+![Contribution Workflow](https://github.com/mauricek12d/CI-CD-Project/blob/main/contribute.yml.png?raw=true)
+
+### ✅ Pull Request Example
+![Pull Request Example](https://github.com/mauricek12d/CI-CD-Project/blob/main/Pull%20Request%20.png?raw=true)
