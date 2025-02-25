@@ -1,0 +1,42 @@
+name: Code Contribution Checks
+
+on:
+  pull_request:
+    branches:
+      - develop  # 🔥 Runs on PRs targeting `develop`
+
+jobs:
+  contribution-checks:
+    runs-on: ubuntu-latest
+
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Linting (ESLint)
+        run: npm run lint  # 🔥 Ensures code follows best practices
+
+      - name: Check Formatting (Prettier)
+        run: npm run format  # 🔥 Ensures files are properly formatted
+
+      - name: Build the Application
+        run: npm run build  # 🔥 Ensures code compiles correctly
+
+      - name: Run Cypress Component Tests
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          spec: "cypress/component/**/*.cy.{js,jsx,ts,tsx}"  # ✅ Runs component tests
+          project: "cypress"
+          command: "npx cypress run --component"
