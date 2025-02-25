@@ -9,7 +9,13 @@ jobs:
   cypress-tests:
     runs-on: ubuntu-latest
 
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
     steps:
+      - name: Debug Secrets (Check if MONGODB_URI is set)
+        run: echo "MONGODB_URI=${{ secrets.MONGODB_URI }}"
+
       - name: Checkout Repository
         uses: actions/checkout@v3
 
@@ -21,13 +27,24 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Start the Application
-        run: npm start & npx wait-on http://localhost:3000
+      - name: Verify Cypress Installation
+        run: npx cypress verify
+
+
+      - name: Build the Application
+        run: npm run build
+
+      - name: Start the Application in the Background
+        run: npm start & # Run the application in the background
+
+      - name: Wait for the server to start
+        run: npx wait-on http://localhost:3001
 
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v5
         with:
-          start: npm start
-          wait-on: http://localhost:3000
+          wait-on: http://localhost:3001
           browser: chrome
-          headless: true
+          spec: "cypress/component-tests/**/*.cy.{js,jsx,ts,tsx}"
+          project: "cypress"
+          command: "npx cypress run --component"
