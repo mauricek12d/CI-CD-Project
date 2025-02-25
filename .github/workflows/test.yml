@@ -41,3 +41,6 @@ jobs:
         with:
           wait-on: http://localhost:3001
           browser: chrome
+          spec: "cypress/component-tests/**/*.cy.{js,jsx,ts,tsx}"
+          project: "cypress"
+          command: "run --component"
